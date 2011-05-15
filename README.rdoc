@@ -1,0 +1,32 @@
+= Table Builder
+
+Table Builder is a simple and flexible table generator for your Rails 3 views.
+It creates tables for a collection of objects...
+
+This project is in a very early development stage, so do not expect everything
+to work yet, but your feedback is appreciated.
+
+== Dependencies
+
+This gem requires Rails 3.
+
+== Install
+
+TODO
+
+== Usage
+
+TODO
+
+== Feedback
+
+TODO
+
+== Contributing
+
+If you want to contribute some changes to the tablebuilder gem, don't hesitate to contact me.
+You can fork the project on Github and send me a pull request or send me patches via email.
+
+== Licence
+
+Copyright (c) 2011 Moritz Breit. See LICENSE.txt for further details.
