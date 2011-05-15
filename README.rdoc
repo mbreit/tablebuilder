@@ -16,7 +16,51 @@ TODO
 
 == Usage
 
-TODO
+Use the `table_for` helper in your views:
+
+  <%= table_for @users do |t| %>
+    <% t.column :username %>
+    <% t.column :email %>
+    <% t.column :actions do |user| %>
+      <%= link_to "View", user %>
+      <%= link_to "Edit", edit_user_path(user) %>
+    <% end %>
+  <% end %>
+
+Or, if you prefer HAML:
+
+  = table_for @users do |t|
+    - t.column :username
+    - t.column :email
+    - t.column :actions do |user|
+      = link_to "View", user
+      = link_to "Edit", edit_user_path(user)
+
+This is equivalent to the following ERB code:
+
+  <table class="users_table">
+    <thead>
+      <th><%= t('.username') %></th>
+      <th><%= t('.email') %></th>
+      <th><%= t('.actions') %></th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr class="<%= cycle('odd', 'even') %>"
+          <td class="username">
+            <%= user.username %>
+          </td>
+          <td class="email">
+            <%= user.email %>
+          </td>
+          <td class="actions">
+            <%= link_to "View", user %>
+            <%= link_to "Edit", edit_user_path(user) %>
+          </td>
+        </td>
+      <% end %>
+    </tbody>
+  </table>
 
 == Feedback
 
