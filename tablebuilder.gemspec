@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "tablebuilder"
   s.version     = Tablebuilder::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Moritz Breit"]
+  s.email       = ["mail@mobr.de"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{A simple but flexible table builder for Rails 3}
+  s.description = %q{Provides a table builder for your Rails views that creates tables for a collection of objects in a DRY way.}
 
   s.rubyforge_project = "tablebuilder"
 
