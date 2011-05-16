@@ -68,7 +68,9 @@ This is equivalent to the following ERB code:
 
 == Feedback
 
-TODO
+If you have feedback like questions, bugs or feature requests,
+you can send me a message on Github, send me a mail or create an issue
+at Github.
 
 == Contributing
 
