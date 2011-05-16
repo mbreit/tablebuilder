@@ -46,7 +46,7 @@ This is equivalent to the following ERB code:
     </thead>
     <tbody>
       <% @users.each do |user| %>
-        <tr class="<%= cycle('odd', 'even') %>"
+        <tr class="<%= cycle('odd', 'even') %>">
           <td class="username">
             <%= user.username %>
           </td>
@@ -74,3 +74,4 @@ You can fork the project on Github and send me a pull request or send me patches
 == Licence
 
 Copyright (c) 2011 Moritz Breit. See LICENSE.txt for further details.
+
