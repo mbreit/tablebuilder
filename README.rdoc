@@ -1,7 +1,9 @@
 = Table Builder
 
 Table Builder is a simple and flexible table generator for your Rails 3 views.
-It creates tables for a collection of objects...
+It creates a table for a collection of objects where every objects maps
+to one row of your table. It is designed for clean and readable template code
+but attempts to be very flexible.
 
 This project is in a very early development stage, so do not expect everything
 to work yet, but your feedback is appreciated.
