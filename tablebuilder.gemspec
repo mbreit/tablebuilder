@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = ""
   s.summary     = %q{A simple but flexible table builder for Rails 3}
   s.description = %q{Provides a table builder for your Rails views that creates tables for a collection of objects in a DRY way.}
+  s.licenses = ['MIT']
 
   s.rubyforge_project = "tablebuilder"
 
