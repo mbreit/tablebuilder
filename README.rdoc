@@ -8,11 +8,12 @@ to work yet, but your feedback is appreciated.
 
 == Dependencies
 
-This gem requires Rails 3.
+This gem requires Rails 3 and should work with Ruby 1.8.7 and 1.9.2.
 
 == Install
 
-TODO
+Add <tt>gem "tablebuilder", :git => "https://github.com/mbreit/tablebuilder"</tt>
+to your Gemfile.
 
 == Usage
 
