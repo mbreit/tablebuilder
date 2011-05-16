@@ -74,7 +74,7 @@ module Tablebuilder
     def render_tbody
       content_tag :tbody do
         @model_list.map do |object|
-          content_tag :tr do
+          content_tag :tr, :class => @context.cycle("odd", "even", :name => "_tablebuilder_row") do
             @columns.map do |column|
               content_tag :td, column.render_content(object)
             end.join.html_safe
