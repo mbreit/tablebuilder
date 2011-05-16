@@ -5,20 +5,29 @@ module Tablebuilder
     def render_header
       if @header.nil?
         @context.t(".#{@column}")
-      elsif @header.respond_to? :call
-        @header.call
       else
-        @header
+        call_or_output(@header)
       end
     end
 
     def render_content(object)
       if @content.nil?
         object.send @column
-      elsif self.content.respond_to? :call
-        @context.capture(object, &@content)
       else
-        @content
+        call_or_output(@content, object)
+      end
+    end
+
+    private
+
+    def call_or_output(target, *opts)
+      if target.respond_to? :call
+        @context.capture(*opts) do |object|
+          result = target.call(*opts)
+          @context.concat result if @context.output_buffer.empty?
+        end
+      else
+        target.to_s
       end
     end
   end
