@@ -1,6 +1,6 @@
 module Tablebuilder
   class Column
-    attr_accessor :column, :header, :content, :context
+    attr_accessor :column, :header, :content, :context, :header_html, :content_html
 
     def render_header
       if @header.nil?
@@ -50,11 +50,15 @@ module Tablebuilder
       col.column = column
       col.content = block || options[:content]
       col.header = options[:header]
+      col.header_html = options[:header_html] || {}
+      col.content_html = options[:html] || {}
+      col.content_html[:class] ||= options[:class]
+      col.content_html[:style] ||= options[:style]
       @columns << col
     end
 
     def render_table
-      content_tag :table do
+      content_tag :table, @options do
         render_thead + render_tbody
       end
     end
@@ -64,7 +68,7 @@ module Tablebuilder
     def render_thead
       content_tag :tr do
         @columns.map do |column|
-          content_tag :th do
+          content_tag :th, column.header_html do
             column.render_header
           end
         end.join.html_safe
@@ -76,7 +80,7 @@ module Tablebuilder
         @model_list.map do |object|
           content_tag :tr, :class => @context.cycle("odd", "even", :name => "_tablebuilder_row") do
             @columns.map do |column|
-              content_tag :td, column.render_content(object)
+              content_tag :td, column.render_content(object), column.content_html
             end.join.html_safe
           end
         end.join.html_safe

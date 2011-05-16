@@ -22,10 +22,10 @@ Add the following line to your Gemfile:
 
 Use the <tt>table_for</tt> helper in your views:
 
-  <%= table_for @users do |t| %>
+  <%= table_for @users, :class => "users_table" do |t| %>
     <% t.column :username %>
     <% t.column :email %>
-    <% t.column :actions do |user| %>
+    <% t.column :actions, :class => "actions" do |user| %>
       <%= link_to "View", user %>
       <%= link_to "Edit", edit_user_path(user) %>
     <% end %>
@@ -33,10 +33,10 @@ Use the <tt>table_for</tt> helper in your views:
 
 Or, if you prefer HAML:
 
-  = table_for @users do |t|
+  = table_for @users, :class => "users_table" do |t|
     - t.column :username
     - t.column :email
-    - t.column :actions do |user|
+    - t.column :actions, :class => "actions" do |user|
       = link_to "View", user
       = link_to "Edit", edit_user_path(user)
 
@@ -51,10 +51,10 @@ This is equivalent to the following ERB code:
     <tbody>
       <% @users.each do |user| %>
         <tr class="<%= cycle('odd', 'even') %>">
-          <td class="username">
+          <td>
             <%= user.username %>
           </td>
-          <td class="email">
+          <td>
             <%= user.email %>
           </td>
           <td class="actions">
