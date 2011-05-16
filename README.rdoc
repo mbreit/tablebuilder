@@ -16,7 +16,7 @@ TODO
 
 == Usage
 
-Use the `table_for` helper in your views:
+Use the <tt>table_for</tt> helper in your views:
 
   <%= table_for @users do |t| %>
     <% t.column :username %>
