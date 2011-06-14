@@ -66,12 +66,14 @@ module Tablebuilder
     private
 
     def render_thead
-      content_tag :tr do
-        @columns.map do |column|
-          content_tag :th, column.header_html do
-            column.render_header
-          end
-        end.join.html_safe
+      content_tag :thead do
+        content_tag :tr do
+          @columns.map do |column|
+            content_tag :th, column.header_html do
+              column.render_header
+            end
+          end.join.html_safe
+        end
       end
     end
 
