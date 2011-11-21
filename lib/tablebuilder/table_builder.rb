@@ -80,7 +80,12 @@ module Tablebuilder
     def render_tbody
       content_tag :tbody do
         @model_list.map do |object|
-          content_tag :tr, :class => @context.cycle("odd", "even", :name => "_tablebuilder_row") do
+          row_classes = @options[:row_classes] || []
+          row_classes = row_classes.call(object) if row_classes.respond_to? :call
+          row_classes ||= []
+          row_classes = row_classes.split if row_classes.respond_to? :split
+          row_classes << @context.cycle("odd", "even", :name => "_tablebuilder_row")
+          content_tag :tr, :class => row_classes.join(" ") do
             @columns.map do |column|
               content_tag :td, column.render_content(object), column.content_html
             end.join.html_safe
