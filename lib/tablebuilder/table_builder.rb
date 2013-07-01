@@ -83,7 +83,8 @@ module Tablebuilder
         @model_list.map do |object|
           cycle_class = @context.cycle("odd", "even", :name => "_tablebuilder_row")
           row_classes = convert_class([object], @options.delete(:row_class), cycle_class)
-          content_tag :tr, :class => row_classes do
+          object_id = if object.respond_to?(:id) then "#{object.class.name.demodulize.downcase}_#{object.id}" else "" end
+          content_tag :tr, :class => row_classes, :id => object_id do
             @columns.map do |column|
               content_tag :td, column.render_content(object), column.content_html
             end.join.html_safe
