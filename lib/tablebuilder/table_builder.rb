@@ -83,7 +83,11 @@ module Tablebuilder
         @model_list.map do |object|
           cycle_class = @context.cycle("odd", "even", :name => "_tablebuilder_row")
           row_classes = convert_class([object], @options.delete(:row_class), cycle_class)
-          object_id = if object.respond_to?(:id) then "#{object.class.name.demodulize.downcase}_#{object.id}" else "" end
+          if @options[:active_record_ids]
+            object_id = if object.respond_to?(:id) then ActionController::RecordIdentifier.dom_id(object) else "" end
+          else
+            object_id = nil
+          end
           content_tag :tr, :class => row_classes, :id => object_id do
             @columns.map do |column|
               content_tag :td, column.render_content(object), column.content_html
