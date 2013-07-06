@@ -35,6 +35,16 @@ module Tablebuilder
   class TableBuilder
     include ActionView::Helpers::TagHelper
 
+    @@show_active_record_ids
+
+    def self.show_active_record_ids
+      @@show_active_record_ids
+    end
+
+    def self.show_active_record_ids=(boolean_value)
+      @@show_active_record_ids = boolean_value
+    end
+
     attr_accessor :output_buffer
 
     def initialize(model_list, context, options)
@@ -64,6 +74,10 @@ module Tablebuilder
       end
     end
 
+    def self.row_id_for(object)
+      "tablebuilder_row_#{ActionController::RecordIdentifier.dom_id(object)}"
+    end
+
     private
 
     def render_thead
@@ -83,8 +97,8 @@ module Tablebuilder
         @model_list.map do |object|
           cycle_class = @context.cycle("odd", "even", :name => "_tablebuilder_row")
           row_classes = convert_class([object], @options.delete(:row_class), cycle_class)
-          if @options[:active_record_ids]
-            object_id = if object.respond_to?(:id) then ActionController::RecordIdentifier.dom_id(object) else "" end
+          if TableBuilder.show_active_record_ids == true
+            object_id = if object.respond_to?(:id) then TableBuilder.row_id_for(object) else "" end
           else
             object_id = nil
           end
