@@ -10,6 +10,11 @@ module Tablebuilder
       end
       builder.render_table
     end
+
+    def table_row_id_for(object)
+      Tablebuilder::TableBuilder.row_id_for(object)
+    end
+
   end
 end
 
