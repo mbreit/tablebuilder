@@ -80,9 +80,10 @@ module Tablebuilder
 
     def render_tbody
       content_tag :tbody do
+        row_class = @options.delete(:row_class)
         @model_list.map do |object|
           cycle_class = @context.cycle("odd", "even", :name => "_tablebuilder_row")
-          row_classes = convert_class([object], @options.delete(:row_class), cycle_class)
+          row_classes = convert_class([object], row_class, cycle_class)
           content_tag :tr, :class => row_classes do
             @columns.map do |column|
               content_tag :td, column.render_content(object), column.content_html
