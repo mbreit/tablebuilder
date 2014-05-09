@@ -51,9 +51,9 @@ module Tablebuilder
       col.content = block || options[:content]
       col.header = options[:header]
       col.header_html = options[:header_html] || {}
-      col.header_html[:class] ||= convert_class([], options[:class], column)
+      col.header_html[:class] ||= self.class.convert_class([], options[:class], column)
       col.content_html = options[:html] || {}
-      col.content_html[:class] ||= convert_class([], options[:class], column)
+      col.content_html[:class] ||= self.class.convert_class([], options[:class], column)
       col.content_html[:style] ||= options[:style]
       @columns << col
     end
@@ -83,7 +83,7 @@ module Tablebuilder
         row_class = @options.delete(:row_class)
         @model_list.map do |object|
           cycle_class = @context.cycle("odd", "even", :name => "_tablebuilder_row")
-          row_classes = convert_class([object], row_class, cycle_class)
+          row_classes = self.class.convert_class([object], row_class, cycle_class)
           content_tag :tr, :class => row_classes do
             @columns.map do |column|
               content_tag :td, column.render_content(object), column.content_html
@@ -93,15 +93,15 @@ module Tablebuilder
       end
     end
 
-    def convert_class(proc_arguments, *input)
+    def self.convert_class(proc_arguments, *input)
       input.map { |e| convert_class_element(proc_arguments, e) }.flatten.join(" ")
     end
 
-    def convert_class_element(proc_arguments, input)
+    def self.convert_class_element(proc_arguments, input)
       [call_or_self(input, *proc_arguments) || []].flatten.map(&:to_s)
     end
 
-    def call_or_self(object, *arguments)
+    def self.call_or_self(object, *arguments)
       object.respond_to?(:call) ? object.call(*arguments) : object
     end
   end
